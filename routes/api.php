@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CvmiStagesDetailsController;
 use App\Http\Controllers\CvmiTestController;
 use App\Http\Controllers\SubscriptionsController;
 use Illuminate\Http\Request;
@@ -40,3 +41,13 @@ Route::resource('subcriptions', SubscriptionsController::class);
 Route::resource('cvmiTest', CvmiTestController::class);
 
 Route::post('updatedata/{id}', [CvmiTestController::class, 'updatedata']);
+
+
+
+// Cvmi Stages Details Routes
+
+
+Route::resource('cvmiStagesDetails', CvmiStagesDetailsController::class);
+
+Route::post('updateData/{id}', [CvmiStagesDetailsController::class, 'updateData']);
+
