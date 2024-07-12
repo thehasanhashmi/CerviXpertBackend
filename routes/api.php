@@ -1,7 +1,11 @@
 <?php
 
+use App\Http\Controllers\CvmiTestController;
+use App\Http\Controllers\SubscriptionsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -17,3 +21,22 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+
+// Users routes
+Route::post('/register', [UserController::class, 'register']);
+Route::post('/login', [UserController::class, 'login']);
+Route::get('/users', [UserController::class, 'index']);
+Route::get('/users/{id}', [UserController::class, 'show']);
+
+
+// Subcriptions Routes
+
+Route::resource('subcriptions', SubscriptionsController::class);
+
+
+// Cvmi Test Routes
+
+Route::resource('cvmiTest', CvmiTestController::class);
+
+Route::post('updatedata/{id}', [CvmiTestController::class, 'updatedata']);
