@@ -37,16 +37,20 @@ class CvmiStagesDetailsController extends Controller
         // Handle single file upload
         if ($request->hasFile('stage_file')) {
             $file = $request->file('stage_file');
-            $fileName = time() . '_' . Str::random(10) . '.' . $file->getClientOriginalExtension();
-            $file->move(public_path('uploads/stage_files'), $fileName);
-            $stageFilePath = 'uploads/stage_files/' . $fileName;
+            $originalName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+            $extension = $file->getClientOriginalExtension();
+            $fileName = $originalName . '.' . $extension;
+            $file->move(public_path('uploads/testing_files'), $fileName);
+            $stageFilePath = 'uploads/testing_files/' . $fileName;
         }
 
         // Handle multiple file uploads
         $detailedFilePaths = [];
         if ($request->hasFile('more_detailed_files')) {
             foreach ($request->file('more_detailed_files') as $file) {
-                $fileName = time() . '_' . Str::random(10) . '.' . $file->getClientOriginalExtension();
+                $originalName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+                $extension = $file->getClientOriginalExtension();
+                $fileName = $originalName . '.' . $extension;
                 $file->move(public_path('uploads/detailed_files'), $fileName);
                 $detailedFilePaths[] = 'uploads/detailed_files/' . $fileName;
             }
@@ -96,7 +100,8 @@ class CvmiStagesDetailsController extends Controller
         // Handle single file upload
         if ($request->hasFile('stage_file')) {
             $file = $request->file('stage_file');
-            $fileName = time() . '_' . Str::random(10) . '.' . $file->getClientOriginalExtension();
+            // $fileName = time() . '_' . Str::random(10) . '.' . $file->getClientOriginalExtension();
+            $fileName = $file->getFilename() . '.' . $file->getClientOriginalExtension();
             $file->move(public_path('uploads/stage_files'), $fileName);
             $stageFilePath = 'uploads/stage_files/' . $fileName;
 
