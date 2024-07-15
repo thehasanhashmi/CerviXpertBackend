@@ -16,5 +16,6 @@ class CvmiTestModel extends Model
         'testing_file',
         'stage',
         'description',
+        'patient_name'
     ];
 }
