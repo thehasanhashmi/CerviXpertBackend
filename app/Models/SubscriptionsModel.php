@@ -17,5 +17,6 @@ class SubscriptionsModel extends Model
         'duration',
         'expiry_date',
         'status',
+        'type'
     ];
 }
