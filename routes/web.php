@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ArtisanController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +17,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+
+Route::get('/artisan/route-clear', [ArtisanController::class, 'routeClear']);
+Route::get('/artisan/route-cache', [ArtisanController::class, 'routeCache']);
+Route::get('/artisan/optimize', [ArtisanController::class, 'optimize']);
