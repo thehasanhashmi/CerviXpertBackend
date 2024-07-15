@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CvmiStagesDetailsModel;
 use App\Models\CvmiTestModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -34,33 +35,63 @@ class CvmiTestController extends Controller
         $request->validate([
             'user_id' => 'required|integer',
             'testing_file' => 'required|file|mimes:pdf,doc,docx,jpg,png', // Adjust file types as needed
-            'stage' => 'required|string|max:255',
+            // 'stage' => 'required|string|max:255',
+            'patient_name' => 'required|string|max:255',
             'description' => 'nullable|string|max:1000',
         ]);
-
+    
         // Handle the file upload
         if ($request->hasFile('testing_file')) {
             // Get the file from the request
             $file = $request->file('testing_file');
-
+    
             // Define the file name and path
             $fileName = time() . '_' . Str::random(10) . '.' . $file->getClientOriginalExtension();
             $file->move(public_path('uploads/testing_files'), $fileName);
             $filePath = 'uploads/testing_files/' . $fileName;
-
+    
             // Prepare the data for insertion into the database
             $data = $request->all();
             $data['testing_file'] = $filePath;
-
-            // Create the record in the database
-            $cvmi = CvmiTestModel::create($data);
-
-            // Return the response
-            return response()->json([
-                'status' => 200,
-                'message' => 'Data created successfully',
-                'data' => $cvmi
-            ]);
+    
+            // Test Results
+            $stage = 1;
+    
+            // Get data from cvmi_stages_details where 
+            $stageData = CvmiStagesDetailsModel::where('id', $stage)->first();
+    
+            if ($stageData) {
+                $stageData = $stageData->toArray();
+                $stageData['stage_file'] = asset($stageData['stage_file']);
+    
+                // Decode the JSON string to an array
+                $moreDetailedFiles = json_decode($stageData['more_detailed_files'], true);
+    
+                // Apply the asset function to each file path in the array
+                if (is_array($moreDetailedFiles)) {
+                    foreach ($moreDetailedFiles as &$file) {
+                        $file = asset($file);
+                    }
+                    // Encode the array back to a JSON string
+                    $stageData['more_detailed_files'] = $moreDetailedFiles;
+                }
+    
+                // Create the record in the database
+                $cvmi = CvmiTestModel::create($data);
+    
+                // Return the response
+                return response()->json([
+                    'status' => 200,
+                    'message' => 'Stage Detected Successfully',
+                    'stage' => $stage,
+                    'data' => $stageData
+                ]);
+            } else {
+                return response()->json([
+                    'status' => 404,
+                    'message' => 'Stage data not found',
+                ], 404);
+            }
         } else {
             return response()->json([
                 'status' => 400,
@@ -68,6 +99,7 @@ class CvmiTestController extends Controller
             ], 400);
         }
     }
+    
 
 
 
@@ -105,7 +137,8 @@ class CvmiTestController extends Controller
         // Validate the incoming request
         $request->validate([
             'user_id' => 'required|integer',
-            'stage' => 'required|string|max:255',
+            'patient_name' => 'required|string|max:255',
+            // 'stage' => 'required|string|max:255',
             'description' => 'nullable|string|max:1000',
             'testing_file' => 'nullable|file|mimes:pdf,doc,docx,jpg,png', // Adjust file types as needed
         ]);
