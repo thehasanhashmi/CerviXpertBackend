@@ -53,3 +53,5 @@ Route::post('updateData/{id}', [CvmiStagesDetailsController::class, 'updateData'
 
 Route::post('cvmiStagesDetails/storeData', [CvmiStagesDetailsController::class, 'storeData']);
 
+
+
