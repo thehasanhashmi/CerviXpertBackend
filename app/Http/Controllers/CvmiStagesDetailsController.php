@@ -25,7 +25,7 @@ class CvmiStagesDetailsController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function CreateData(Request $request)
     {
         $request->validate([
             'stage_name' => 'required|string|max:255',

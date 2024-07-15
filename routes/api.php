@@ -50,4 +50,5 @@ Route::post('updatedata/{id}', [CvmiTestController::class, 'updatedata']);
 Route::resource('cvmiStagesDetails', CvmiStagesDetailsController::class);
 
 Route::post('updateData/{id}', [CvmiStagesDetailsController::class, 'updateData']);
+Route::post('CreateData', [CvmiStagesDetailsController::class, 'CreateData']);
 
