@@ -25,7 +25,7 @@ class CvmiStagesDetailsController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function CreateData(Request $request)
+    public function storeData(Request $request)
     {
         $request->validate([
             'stage_name' => 'required|string|max:255',
@@ -48,9 +48,7 @@ class CvmiStagesDetailsController extends Controller
         $detailedFilePaths = [];
         if ($request->hasFile('more_detailed_files')) {
             foreach ($request->file('more_detailed_files') as $file) {
-                $originalName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
-                $extension = $file->getClientOriginalExtension();
-                $fileName = $originalName . '.' . $extension;
+                $fileName = time() . '_' . Str::random(10) . '.' . $file->getClientOriginalExtension();
                 $file->move(public_path('uploads/detailed_files'), $fileName);
                 $detailedFilePaths[] = 'uploads/detailed_files/' . $fileName;
             }
@@ -101,7 +99,7 @@ class CvmiStagesDetailsController extends Controller
         if ($request->hasFile('stage_file')) {
             $file = $request->file('stage_file');
             // $fileName = time() . '_' . Str::random(10) . '.' . $file->getClientOriginalExtension();
-            $fileName = $file->getFilename() . '.' . $file->getClientOriginalExtension();
+            $fileName = $file->getFilename().'.' . $file->getClientOriginalExtension();
             $file->move(public_path('uploads/stage_files'), $fileName);
             $stageFilePath = 'uploads/stage_files/' . $fileName;
 
