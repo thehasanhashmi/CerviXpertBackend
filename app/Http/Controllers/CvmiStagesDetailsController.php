@@ -27,7 +27,6 @@ class CvmiStagesDetailsController extends Controller
      */
     public function storeData(Request $request)
     {
-        die();
         $request->validate([
             'stage_name' => 'required|string|max:255',
             'stage_file' => 'required|file|mimes:jpg,jpeg,png,pdf,doc,docx',
