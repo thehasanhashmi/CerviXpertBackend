@@ -69,6 +69,8 @@ class CvmiStagesDetailsController extends Controller
         ]);
     }
 
+    
+
     /**
      * Display the specified resource.
      */
