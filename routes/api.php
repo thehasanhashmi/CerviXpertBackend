@@ -31,6 +31,9 @@ Route::post('/login', [UserController::class, 'login']);
 Route::get('/users', [UserController::class, 'index']);
 Route::get('/users/{id}', [UserController::class, 'show']);
 
+Route::post('/sendOtp', [UserController::class, 'sendOtp']);
+
+Route::post('/loginWithMobileNumber', [UserController::class, 'loginWithMobileNumber']);
 
 // Subcriptions Routes
 
