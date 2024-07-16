@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CvmiStagesDetailsController;
 use App\Http\Controllers\CvmiTestController;
+use App\Http\Controllers\PaymentSettingsController;
 use App\Http\Controllers\SubscriptionsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -55,3 +56,6 @@ Route::post('cvmiStagesDetails/storeData', [CvmiStagesDetailsController::class, 
 
 
 
+// Payment Settings Routes
+
+Route::resource('paymentsettings', PaymentSettingsController::class);
