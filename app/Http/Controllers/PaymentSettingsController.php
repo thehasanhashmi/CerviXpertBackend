@@ -12,7 +12,7 @@ class PaymentSettingsController extends Controller
      */
     public function index()
     {
-        $payment = PaymentSettingsModel::all();
+        $payment = PaymentSettingsModel::where('mode', 'test')->get();
 
         return response()->json([
             'status' => 200,
@@ -20,6 +20,7 @@ class PaymentSettingsController extends Controller
             'data' => $payment
         ]);
     }
+
 
     /**
      * Store a newly created resource in storage.
