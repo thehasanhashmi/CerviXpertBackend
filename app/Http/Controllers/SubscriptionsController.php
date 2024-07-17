@@ -49,6 +49,43 @@ class SubscriptionsController extends Controller
             'data' => $subscription
         ]);
     }
+    public function imageUpload(Request $request)
+    {
+        // Check if a file was uploaded
+        if ($request->hasFile('image')) {
+            $request->validate([
+                'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            ]);
+
+            $file = $request->file('image');
+
+            // Get the original file name
+            $originalFileName = $file->getClientOriginalName();
+
+            // Set the destination path
+            $destinationPath = public_path('uploads/images');
+
+            // Move the file to the destination path
+            $file->move($destinationPath, $originalFileName);
+
+            // Generate the URL to the stored file
+            $url = asset('uploads/images/' . $originalFileName);
+
+            return response()->json([
+                'status' => 200,
+                'message' => 'Image uploaded successfully',
+                'data' => $url
+            ], 200);
+        }
+
+        // If no file was uploaded, return an error response
+        return response()->json([
+            'status' => 400,
+            'message' => 'No image uploaded',
+            'data' => []
+        ], 400);
+    }
+
 
     /**
      * Update the specified resource in storage.

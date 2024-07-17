@@ -38,6 +38,7 @@ Route::post('/loginWithMobileNumber', [UserController::class, 'loginWithMobileNu
 // Subcriptions Routes
 
 Route::resource('subcriptions', SubscriptionsController::class);
+Route::post('uploadImage', [SubscriptionsController::class, 'imageUpload']);
 
 
 // Cvmi Test Routes
