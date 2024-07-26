@@ -106,7 +106,7 @@ class CvmiTestController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function getCvmiTestbyID(string $id)
     {
         $cvmi = CvmiTestModel::find($id);
 

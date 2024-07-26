@@ -38,7 +38,10 @@ Route::post('/loginWithMobileNumber', [UserController::class, 'loginWithMobileNu
 // Subcriptions Routes
 
 Route::resource('subcriptions', SubscriptionsController::class);
+
 Route::post('uploadImage', [SubscriptionsController::class, 'imageUpload']);
+
+Route::get('getSubscriptionbyID/{id}', [SubscriptionsController::class, 'getSubscriptionbyID']);
 
 
 // Cvmi Test Routes
@@ -46,6 +49,8 @@ Route::post('uploadImage', [SubscriptionsController::class, 'imageUpload']);
 Route::resource('cvmiTest', CvmiTestController::class);
 
 Route::post('updatedata/{id}', [CvmiTestController::class, 'updatedata']);
+
+Route::get('getCvmiTestbyID/{id}', [CvmiTestController::class,'getCvmiTestbyID']);
 
 
 
