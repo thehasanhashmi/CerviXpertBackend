@@ -21,6 +21,7 @@ class SubscriptionsController extends Controller
         ]);
     }
 
+    
 
     /**
      * Store a newly created resource in storage.
@@ -39,7 +40,7 @@ class SubscriptionsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function getSubscriptionbyID(string $id)
     {
         $subscription = SubscriptionsModel::find($id);
 
