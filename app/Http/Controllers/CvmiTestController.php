@@ -106,16 +106,17 @@ class CvmiTestController extends Controller
     /**
      * Display the specified resource.
      */
-    public function getCvmiTestbyID(string $id)
+    public function getCvmiTestByUserId(string $id)
     {
-        $cvmi = CvmiTestModel::find($id);
-
+        $cvmi = CvmiTestModel::where('user_id', $id)->get();
+    
         return response()->json([
             'status' => 200,
             'message' => 'Data retrieved successfully',
             'data' => $cvmi
         ]);
     }
+    
 
 
     /**
