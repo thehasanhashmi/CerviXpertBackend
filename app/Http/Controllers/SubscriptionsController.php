@@ -40,10 +40,9 @@ class SubscriptionsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function getSubscriptionbyID(string $id)
+    public function getSubscriptionbyUserID(string $id)
     {
-        $subscription = SubscriptionsModel::find($id);
-
+        $subscription = SubscriptionsModel::where('user_id',$id)->get();
         return response()->json([
             'status' => 200,
             'message' => 'Data retrieved successfully',

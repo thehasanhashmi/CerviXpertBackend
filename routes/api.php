@@ -41,7 +41,7 @@ Route::resource('subcriptions', SubscriptionsController::class);
 
 Route::post('uploadImage', [SubscriptionsController::class, 'imageUpload']);
 
-Route::get('getSubscriptionbyID/{id}', [SubscriptionsController::class, 'getSubscriptionbyID']);
+Route::get('getSubscriptionbyUserID/{id}', [SubscriptionsController::class, 'getSubscriptionbyUserID']);
 
 
 // Cvmi Test Routes
@@ -50,7 +50,7 @@ Route::resource('cvmiTest', CvmiTestController::class);
 
 Route::post('updatedata/{id}', [CvmiTestController::class, 'updatedata']);
 
-Route::get('getCvmiTestbyID/{id}', [CvmiTestController::class,'getCvmiTestbyID']);
+Route::get('getCvmiTestByUserId/{id}', [CvmiTestController::class,'getCvmiTestByUserId']);
 
 
 
