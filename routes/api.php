@@ -52,6 +52,8 @@ Route::post('updatedata/{id}', [CvmiTestController::class, 'updatedata']);
 
 Route::get('getCvmiTestByUserId/{id}', [CvmiTestController::class,'getCvmiTestByUserId']);
 
+Route::post('updateByTestId/{id}', [CvmiTestController::class,'updateByTestId']);
+
 
 
 // Cvmi Stages Details Routes
