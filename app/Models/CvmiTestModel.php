@@ -16,6 +16,8 @@ class CvmiTestModel extends Model
         'testing_file',
         'stage',
         'description',
-        'patient_name'
+        'patient_name',
+        'feedback',
+        'feedback_stage',
     ];
 }
