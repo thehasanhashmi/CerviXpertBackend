@@ -193,8 +193,14 @@ class CvmiTestController extends Controller
             return response()->json(['message' => 'Record not found'], 404);
         }
 
+
+        $cvmiTest->feedback = $request->input('feedback');
+        $cvmiTest->feedback_stage = $request->input('feedback_stage');
+
+
         $cvmiTest->save();
 
+        
         // Return a success response
         return response()->json([
             'status' => 200,
