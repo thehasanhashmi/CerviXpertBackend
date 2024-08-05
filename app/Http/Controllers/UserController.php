@@ -37,8 +37,8 @@ class UserController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8',
-            'first_name' => 'required|string|max:255',
-            'last_name' => 'required|string|max:255',
+            // 'first_name' => 'required|string|max:255',
+            // 'last_name' => 'required|string|max:255',
             'mobile_no' => 'required|string|max:15',
             'mobile_verified' => 'required|boolean',
             'profil_photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
